@@ -46,10 +46,10 @@ export default function NewGoalPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
-      <nav className="bg-white dark:bg-gray-950 shadow-sm">
+      <nav className="sticky top-0 z-50 glass">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <Link href="/" className="text-2xl font-bold">
+            <Link href="/" className="text-2xl font-semibold tracking-tight hover:opacity-80 transition-opacity">
               Become Better
             </Link>
             <Link href="/" className="text-gray-600 hover:text-gray-900">

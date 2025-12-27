@@ -59,24 +59,12 @@ export default async function SettingsPage() {
           <SettingsForm initialSettings={settings} timezones={TIMEZONES} />
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4 text-red-600">Danger Zone</h2>
-          <p className="text-gray-600 mb-4">
+        <div className="bg-white dark:bg-gray-900 rounded-xl border border-red-200 dark:border-red-900/30 p-6">
+          <h2 className="text-lg font-semibold mb-2 text-red-600 dark:text-red-400">Danger Zone</h2>
+          <p className="text-apple-gray-600 dark:text-apple-gray-400 text-sm mb-4">
             Deleting your account will permanently remove all your data, including goals, updates, and insights.
           </p>
-          <form action="/api/auth/delete" method="POST">
-            <button
-              type="submit"
-              onClick={(e) => {
-                if (!confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                  e.preventDefault()
-                }
-              }}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
-            >
-              Delete Account
-            </button>
-          </form>
+          <DeleteAccountButton />
         </div>
       </main>
     </div>

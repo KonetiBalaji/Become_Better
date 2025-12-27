@@ -69,9 +69,9 @@ export default function OnboardingPage() {
       <div className="w-full max-w-md space-y-5 animate-fade-in">
         <div className="text-center space-y-3">
           <p className="text-xs text-gray-400 dark:text-gray-600 font-medium tracking-wide">Step 2 of 2</p>
-          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">Personalize your experience</h1>
+          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">Tell us a bit about you</h1>
           <p className="text-gray-700 dark:text-gray-300 text-base">
-            Tell us a bit about yourself. This helps us tailor your journey.
+            Help us personalize your journey.
           </p>
         </div>
 

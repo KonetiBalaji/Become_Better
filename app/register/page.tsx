@@ -153,7 +153,7 @@ export default function RegisterPage() {
                 </p>
               )}
               <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-500">
-                Use a mix of letters and numbers.
+                At least 8 characters. Numbers recommended.
               </p>
             </div>
           </div>

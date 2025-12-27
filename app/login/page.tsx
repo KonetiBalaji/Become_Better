@@ -23,7 +23,7 @@ export default function LoginPage() {
     if (searchParams.get('registered') === 'true') {
       setSuccessMessage('Account created successfully! Please sign in to continue.')
     } else if (searchParams.get('onboarded') === 'true') {
-      setSuccessMessage('Profile updated! Please sign in to get started.')
+      setSuccessMessage('All set. Sign in to continue your progress.')
     }
   }, [searchParams])
 

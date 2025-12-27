@@ -16,15 +16,17 @@ export async function sendEmailNotification(options: EmailOptions): Promise<bool
   }
 
   try {
+    // Use verified domain or Resend's default domain for development
+    // For production, set RESEND_FROM_EMAIL to your verified domain
+    // For development, Resend allows using onboarding@resend.dev
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+    
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
       },
-      // Use verified domain or Resend's default domain for development
-      const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
-      
       body: JSON.stringify({
         from: fromEmail,
         to: options.to,
@@ -34,8 +36,14 @@ export async function sendEmailNotification(options: EmailOptions): Promise<bool
     })
 
     if (!response.ok) {
-      const error = await response.text()
-      console.error('Resend API error:', error)
+      const errorData = await response.json().catch(() => ({ message: 'Unknown error' }))
+      console.error('Resend API error:', errorData)
+      
+      // If domain not verified, provide helpful error message
+      if (errorData.statusCode === 403 && errorData.message?.includes('domain is not verified')) {
+        console.error('Domain verification required. Use onboarding@resend.dev for development or verify your domain in Resend.')
+      }
+      
       return false
     }
 

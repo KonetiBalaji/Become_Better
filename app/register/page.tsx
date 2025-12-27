@@ -50,7 +50,8 @@ export default function RegisterPage() {
         return
       }
 
-      router.push('/login?registered=true')
+      // Redirect to Step 2 (onboarding)
+      router.push(`/onboarding?email=${encodeURIComponent(email)}`)
     } catch (error) {
       setError('Something went wrong. Please try again in a moment.')
     } finally {

@@ -121,7 +121,7 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
         <button
           type="submit"
           disabled={loading}
-          className="w-full apple-button disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
         >
           {loading ? 'Saving...' : 'Save Settings'}
         </button>

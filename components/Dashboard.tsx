@@ -156,40 +156,43 @@ export default async function Dashboard({ userId }: DashboardProps) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold mb-3">One goal. One step. Today.</h3>
+              <h3 className="text-2xl font-semibold mb-3">Start with one small win today.</h3>
               <p className="text-apple-gray-600 dark:text-apple-gray-400 mb-8 max-w-md mx-auto text-base leading-relaxed">
-                Most people quit because they start too big.
+                Most people quit by aiming too big.
                 <br />
-                Start small. Build momentum.
+                Pick one goal you can complete today.
               </p>
               
               {/* Subtle 3-step preview */}
               <div className="mb-10 max-w-md mx-auto">
                 <div className="flex items-center justify-center gap-8 text-sm text-apple-gray-500 dark:text-apple-gray-500">
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-apple-gray-200 dark:bg-apple-gray-700 flex items-center justify-center">
-                      <span className="text-apple-gray-700 dark:text-apple-gray-300 font-semibold">1</span>
+                  <div className="flex flex-col items-center gap-2 animate-fade-in">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shadow-sm">
+                      <span className="text-blue-700 dark:text-blue-400 font-bold text-sm">1</span>
                     </div>
-                    <span className="text-xs font-medium text-apple-gray-700 dark:text-apple-gray-300">Pick a goal</span>
+                    <span className="text-xs font-semibold text-apple-gray-900 dark:text-apple-gray-100">Pick a goal</span>
                   </div>
                   <div className="w-8 h-px bg-apple-gray-200 dark:bg-apple-gray-700"></div>
                   <div className="flex flex-col items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-apple-gray-100 dark:bg-apple-gray-800 flex items-center justify-center">
-                      <span className="text-apple-gray-400 dark:text-apple-gray-500 font-medium">2</span>
+                    <div className="w-8 h-8 rounded-full bg-apple-gray-100 dark:bg-apple-gray-800 flex items-center justify-center opacity-50">
+                      <span className="text-apple-gray-400 dark:text-apple-gray-500 font-medium text-xs">2</span>
                     </div>
-                    <span className="text-xs">Track daily</span>
+                    <span className="text-xs opacity-60">Track daily</span>
                   </div>
-                  <div className="w-8 h-px bg-apple-gray-200 dark:bg-apple-gray-700"></div>
+                  <div className="w-8 h-px bg-apple-gray-200 dark:bg-apple-gray-700 opacity-50"></div>
                   <div className="flex flex-col items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-apple-gray-100 dark:bg-apple-gray-800 flex items-center justify-center">
-                      <span className="text-apple-gray-400 dark:text-apple-gray-500 font-medium">3</span>
+                    <div className="w-8 h-8 rounded-full bg-apple-gray-100 dark:bg-apple-gray-800 flex items-center justify-center opacity-50">
+                      <span className="text-apple-gray-400 dark:text-apple-gray-500 font-medium text-xs">3</span>
                     </div>
-                    <span className="text-xs">See patterns</span>
+                    <span className="text-xs opacity-60">See patterns</span>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4">
+                <p className="text-sm text-apple-gray-700 dark:text-apple-gray-300 font-medium mb-2">
+                  You don't need motivation. You just need one action.
+                </p>
                 <Link
                   href="/goals/new"
                   className="apple-button inline-flex items-center"

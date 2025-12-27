@@ -90,16 +90,13 @@ export default async function Dashboard({ userId }: DashboardProps) {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <h1 className="text-2xl font-semibold tracking-tight">Become Better</h1>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <Link
                 href="/settings"
                 className="text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-950 dark:hover:text-apple-gray-50 text-sm font-medium transition-colors"
               >
                 Settings
               </Link>
-              <div className="w-8 h-8 rounded-full bg-apple-gray-200 dark:bg-apple-gray-700 flex items-center justify-center text-xs font-medium text-apple-gray-700 dark:text-apple-gray-300">
-                {initials}
-              </div>
               <SignOutButton />
             </div>
           </div>

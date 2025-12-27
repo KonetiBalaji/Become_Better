@@ -5,7 +5,7 @@
 @layer base {
   body {
     @apply antialiased;
-    background-color: #f5f5f7;
+    background-color: white;
     color: #1c1c1e;
     font-feature-settings: "kern" 1;
     -webkit-font-smoothing: antialiased;
@@ -14,7 +14,7 @@
 
   @media (prefers-color-scheme: dark) {
     body {
-      background-color: #1c1c1e;
+      background-color: #030712; /* gray-950 */
       color: #f5f5f7;
     }
   }

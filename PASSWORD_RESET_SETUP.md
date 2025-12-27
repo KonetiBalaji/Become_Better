@@ -100,6 +100,19 @@ npm run dev
 3. Resend dashboard for delivery status
 4. `RESEND_FROM_EMAIL` is configured (if using custom domain)
 
+### "You can only send testing emails to your own email address"
+
+**This is a Resend free tier limitation:**
+- Resend's free tier only allows sending emails to the email address associated with your Resend account
+- To send to any email address, you need to:
+  1. Verify a domain in Resend (resend.com/domains)
+  2. Set `RESEND_FROM_EMAIL` to use your verified domain
+  3. Upgrade to a paid plan (if needed)
+
+**For development/testing:**
+- Use your own email address (the one linked to your Resend account)
+- Or verify a domain to send to any address
+
 ### Token expired
 
 Tokens expire after 1 hour. User needs to request a new reset link.

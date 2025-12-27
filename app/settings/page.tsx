@@ -30,8 +30,8 @@ export default async function SettingsPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
+      <nav className="bg-white dark:bg-gray-950 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <Link href="/" className="text-2xl font-bold">
@@ -54,7 +54,7 @@ export default async function SettingsPage() {
 
         <h1 className="text-3xl font-bold mb-8">Settings</h1>
 
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6 mb-6">
           <SettingsForm initialSettings={settings} timezones={TIMEZONES} />
         </div>
 

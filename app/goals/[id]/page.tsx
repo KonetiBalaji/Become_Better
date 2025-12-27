@@ -61,8 +61,8 @@ export default async function GoalDetailPage({
   })
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
+      <nav className="bg-white dark:bg-gray-950 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <Link href="/" className="text-2xl font-bold">
@@ -83,7 +83,7 @@ export default async function GoalDetailPage({
           ← Back to Goals
         </Link>
 
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6 mb-6">
           <div className="flex items-start justify-between mb-4">
             <div>
               <h1 className="text-3xl font-bold mb-2">{goal.title}</h1>
@@ -114,12 +114,12 @@ export default async function GoalDetailPage({
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Update Progress</h2>
             <GoalUpdateForm goalId={goal.id} />
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Streak Statistics</h2>
             <div className="space-y-2 mb-4">
               <div className="flex justify-between">

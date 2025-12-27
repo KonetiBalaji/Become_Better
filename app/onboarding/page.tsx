@@ -65,7 +65,7 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-[#1c1c1e]">
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-gray-950">
       <div className="w-full max-w-md space-y-5 animate-fade-in">
         <div className="text-center space-y-3">
           <p className="text-xs text-gray-400 dark:text-gray-600 font-medium tracking-wide">Step 2 of 2</p>

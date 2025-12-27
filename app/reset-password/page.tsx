@@ -98,7 +98,7 @@ export default function ResetPasswordPage() {
 
   if (tokenValid === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-[#1c1c1e]">
+      <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-gray-950">
         <div className="w-full max-w-md text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
           <p className="mt-4 text-gray-600 dark:text-gray-400">Verifying reset link...</p>
@@ -109,7 +109,7 @@ export default function ResetPasswordPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-[#1c1c1e]">
+      <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-gray-950">
         <div className="w-full max-w-md space-y-5 animate-fade-in text-center">
           <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto">
             <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,7 +125,7 @@ export default function ResetPasswordPage() {
 
   if (tokenValid === false) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-[#1c1c1e]">
+      <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-gray-950">
         <div className="w-full max-w-md space-y-5 animate-fade-in">
           <div className="text-center space-y-3">
             <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">Invalid reset link</h1>
@@ -157,7 +157,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-[#1c1c1e]">
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 lg:py-12 bg-white dark:bg-gray-950">
       <div className="w-full max-w-md space-y-5 animate-fade-in">
         <div className="text-center space-y-3">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">Reset your password</h1>

@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/prisma'
 import SettingsForm from '@/components/SettingsForm'
+import DeleteAccountButton from '@/components/DeleteAccountButton'
 import Link from 'next/link'
 import SignOutButton from '@/components/SignOutButton'
 

@@ -54,7 +54,7 @@ export default async function Dashboard({ userId }: DashboardProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 glass border-b border-apple-gray-200/50 dark:border-apple-gray-800/50">
+      <nav className="sticky top-0 z-50 glass">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <h1 className="text-2xl font-semibold tracking-tight">Become Better</h1>

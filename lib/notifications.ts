@@ -22,8 +22,11 @@ export async function sendEmailNotification(options: EmailOptions): Promise<bool
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
       },
+      // Use verified domain or Resend's default domain for development
+      const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+      
       body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL || 'Become Better <noreply@becomebetter.app>',
+        from: fromEmail,
         to: options.to,
         subject: options.subject,
         html: options.html,

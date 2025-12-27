@@ -89,9 +89,11 @@ export async function POST(request: NextRequest) {
 
     if (!emailSent) {
       console.error('Failed to send password reset email')
+      // Still return success to user (security best practice)
+      // Log the error for admin review
       return NextResponse.json(
-        { error: 'Failed to send email. Please try again later.' },
-        { status: 500 }
+        { message: 'If an account exists with this email, a password reset link has been sent.' },
+        { status: 200 }
       )
     }
 

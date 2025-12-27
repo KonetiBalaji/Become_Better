@@ -8,9 +8,9 @@ export const dynamic = 'force-dynamic'
 const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  age: z.number().int().min(1).max(150),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  age: z.number().int().min(1).max(150).optional().nullable(),
   nickname: z.string().optional(),
 })
 
@@ -39,9 +39,9 @@ export async function POST(request: NextRequest) {
       data: {
         email: validatedData.email,
         passwordHash,
-        firstName: validatedData.firstName,
-        lastName: validatedData.lastName,
-        age: validatedData.age,
+        firstName: validatedData.firstName || 'User',
+        lastName: validatedData.lastName || null,
+        age: validatedData.age || null,
         nickname: validatedData.nickname,
         settings: {
           create: {

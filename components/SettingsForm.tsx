@@ -26,30 +26,47 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const saveSettings = async (data: typeof formData, showMessage = true) => {
     setLoading(true)
-    setMessage('')
+    if (showMessage) setMessage('')
 
     try {
       const response = await fetch('/api/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       })
 
       if (!response.ok) {
-        setMessage('Failed to update settings')
-        return
+        if (showMessage) setMessage('Failed to update settings')
+        return false
       }
 
-      setMessage('Settings updated successfully')
+      if (showMessage) {
+        setMessage('Settings updated successfully')
+        setTimeout(() => setMessage(''), 3000)
+      }
       router.refresh()
+      return true
     } catch (error) {
-      setMessage('An error occurred. Please try again.')
+      if (showMessage) setMessage('An error occurred. Please try again.')
+      return false
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    await saveSettings(formData)
+  }
+
+  const handleToggle = async (field: 'darkMode' | 'emailNotifications' | 'pushNotifications') => {
+    const newValue = !formData[field]
+    const updatedData = { ...formData, [field]: newValue }
+    setFormData(updatedData)
+    // Auto-save toggle changes
+    await saveSettings(updatedData, false)
   }
 
   return (
@@ -100,58 +117,104 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
         </select>
       </div>
 
-      <div className="space-y-4 pt-2">
-        <div className="flex items-center">
-          <input
-            id="darkMode"
-            type="checkbox"
-            checked={formData.darkMode}
-            onChange={(e) => setFormData({ ...formData, darkMode: e.target.checked })}
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-700 rounded"
-          />
-          <label htmlFor="darkMode" className="ml-3 block text-sm text-apple-gray-900 dark:text-apple-gray-100">
-            Dark Mode
-          </label>
-        </div>
-
-        <div className="flex items-center">
-          <input
-            id="emailNotifications"
-            type="checkbox"
-            checked={formData.emailNotifications}
-            onChange={(e) =>
-              setFormData({ ...formData, emailNotifications: e.target.checked })
-            }
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-700 rounded"
-          />
-          <label htmlFor="emailNotifications" className="ml-3 block text-sm text-apple-gray-900 dark:text-apple-gray-100">
-            Email Notifications
-          </label>
-        </div>
-
-        <div className="flex items-center">
-          <input
-            id="pushNotifications"
-            type="checkbox"
-            checked={formData.pushNotifications}
-            onChange={(e) =>
-              setFormData({ ...formData, pushNotifications: e.target.checked })
-            }
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-700 rounded"
-          />
-          <label htmlFor="pushNotifications" className="ml-3 block text-sm text-apple-gray-900 dark:text-apple-gray-100">
-            Push Notifications
-          </label>
-        </div>
+      <div className="pt-2">
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full apple-button disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading ? 'Saving...' : 'Save Settings'}
+        </button>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full apple-button disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {loading ? 'Saving...' : 'Save Settings'}
-      </button>
+      <div className="border-t border-gray-200 dark:border-gray-800 pt-6 mt-6">
+        <h3 className="text-sm font-semibold text-apple-gray-900 dark:text-apple-gray-100 mb-4">Preferences</h3>
+        <div className="space-y-4">
+          {/* Dark Mode Toggle */}
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <label htmlFor="darkMode" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 cursor-pointer">
+                Dark Mode
+              </label>
+              <p className="text-xs text-apple-gray-500 dark:text-apple-gray-500 mt-1">
+                Switch to dark theme
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleToggle('darkMode')}
+              disabled={loading}
+              className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+                formData.darkMode ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-700'
+              }`}
+              role="switch"
+              aria-checked={formData.darkMode}
+            >
+              <span
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                  formData.darkMode ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Email Notifications Toggle */}
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <label htmlFor="emailNotifications" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 cursor-pointer">
+                Email Notifications
+              </label>
+              <p className="text-xs text-apple-gray-500 dark:text-apple-gray-500 mt-1">
+                Receive updates via email
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleToggle('emailNotifications')}
+              disabled={loading}
+              className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+                formData.emailNotifications ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-700'
+              }`}
+              role="switch"
+              aria-checked={formData.emailNotifications}
+            >
+              <span
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                  formData.emailNotifications ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Push Notifications Toggle */}
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <label htmlFor="pushNotifications" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 cursor-pointer">
+                Push Notifications
+              </label>
+              <p className="text-xs text-apple-gray-500 dark:text-apple-gray-500 mt-1">
+                Get browser notifications
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleToggle('pushNotifications')}
+              disabled={loading}
+              className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+                formData.pushNotifications ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-700'
+              }`}
+              role="switch"
+              aria-checked={formData.pushNotifications}
+            >
+              <span
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                  formData.pushNotifications ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              />
+            </button>
+          </div>
+        </div>
+      </div>
     </form>
   )
 }

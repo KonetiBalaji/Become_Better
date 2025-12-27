@@ -3,8 +3,8 @@ import { getCurrentUser } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/prisma'
 import SettingsForm from '@/components/SettingsForm'
 import DeleteAccountButton from '@/components/DeleteAccountButton'
+import UserMenu from '@/components/UserMenu'
 import Link from 'next/link'
-import SignOutButton from '@/components/SignOutButton'
 
 // Comprehensive timezones organized by region
 const TIMEZONES = [
@@ -87,6 +87,36 @@ export default async function SettingsPage() {
     redirect('/login')
   }
 
+  // Get user data for menu
+  const userData = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: {
+      firstName: true,
+      lastName: true,
+      nickname: true,
+      email: true,
+    },
+  })
+
+  // Generate initials for avatar
+  const getInitials = () => {
+    if (userData?.nickname) {
+      return userData.nickname.charAt(0).toUpperCase()
+    }
+    if (userData?.firstName && userData?.lastName) {
+      return `${userData.firstName.charAt(0)}${userData.lastName.charAt(0)}`.toUpperCase()
+    }
+    if (userData?.firstName) {
+      return userData.firstName.charAt(0).toUpperCase()
+    }
+    if (userData?.email) {
+      return userData.email.charAt(0).toUpperCase()
+    }
+    return 'U'
+  }
+  const initials = getInitials()
+  const displayName = userData?.nickname || userData?.firstName || null
+
   const settings = await prisma.userSettings.findUnique({
     where: { userId: user.id },
   })
@@ -103,7 +133,7 @@ export default async function SettingsPage() {
               <Link href="/" className="text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-950 dark:hover:text-apple-gray-50 text-sm font-medium transition-colors">
                 Goals
               </Link>
-              <SignOutButton />
+              <UserMenu initials={initials} displayName={displayName} />
             </div>
           </div>
         </div>

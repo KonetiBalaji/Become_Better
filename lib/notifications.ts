@@ -39,9 +39,13 @@ export async function sendEmailNotification(options: EmailOptions): Promise<bool
       const errorData = await response.json().catch(() => ({ message: 'Unknown error' }))
       console.error('Resend API error:', errorData)
       
-      // If domain not verified, provide helpful error message
-      if (errorData.statusCode === 403 && errorData.message?.includes('domain is not verified')) {
-        console.error('Domain verification required. Use onboarding@resend.dev for development or verify your domain in Resend.')
+      // Handle different Resend errors
+      if (errorData.statusCode === 403) {
+        if (errorData.message?.includes('domain is not verified')) {
+          console.error('Domain verification required. Use onboarding@resend.dev for development or verify your domain in Resend.')
+        } else if (errorData.message?.includes('only send testing emails to your own email')) {
+          console.warn('Resend free tier limitation: Can only send to account owner email. For production, verify a domain in Resend.')
+        }
       }
       
       return false

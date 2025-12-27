@@ -30,8 +30,18 @@ export default function NewGoalPage() {
     description: false,
   })
   const [showFeedback, setShowFeedback] = useState(false)
+  const [showRemainingFields, setShowRemainingFields] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  // Show remaining fields when user has entered a title
+  useEffect(() => {
+    if (formData.title.trim().length >= 3 && !showRemainingFields) {
+      setShowRemainingFields(true)
+    } else if (formData.title.trim().length === 0) {
+      setShowRemainingFields(false)
+    }
+  }, [formData.title, showRemainingFields])
 
   // Debounced suggestion logic
   useEffect(() => {
@@ -219,66 +229,70 @@ export default function NewGoalPage() {
             )}
           </div>
 
-          <div>
-            <label htmlFor="category" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 mb-2">
-              Category {appliedSuggestions.category && (
-                <span className="ml-2 text-green-600 dark:text-green-400 text-xs">✓ Applied</span>
-              )}
-            </label>
-            <div className="relative">
-              <select
-                id="category"
-                required
-                value={formData.category}
-                onChange={(e) => {
-                  setFormData({ ...formData, category: e.target.value as any })
-                  setAppliedSuggestions({ ...appliedSuggestions, category: false })
-                }}
-                className={`w-full px-4 py-3 pr-10 rounded-xl bg-gray-50 dark:bg-gray-900 border transition-all appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  appliedSuggestions.category && showFeedback
-                    ? 'border-green-300 dark:border-green-700'
-                    : 'border-gray-300 dark:border-gray-700'
-                } text-gray-900 dark:text-gray-100`}
-              >
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <svg className="w-5 h-5 text-apple-gray-400 dark:text-apple-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+          {showRemainingFields && (
+            <>
+              <div className="animate-fade-in">
+                <label htmlFor="category" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 mb-2">
+                  Category {appliedSuggestions.category && (
+                    <span className="ml-2 text-green-600 dark:text-green-400 text-xs">✓ Applied</span>
+                  )}
+                </label>
+                <div className="relative">
+                  <select
+                    id="category"
+                    required
+                    value={formData.category}
+                    onChange={(e) => {
+                      setFormData({ ...formData, category: e.target.value as any })
+                      setAppliedSuggestions({ ...appliedSuggestions, category: false })
+                    }}
+                    className={`w-full px-4 py-3 pr-10 rounded-xl bg-gray-50 dark:bg-gray-900 border transition-all appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                      appliedSuggestions.category && showFeedback
+                        ? 'border-green-300 dark:border-green-700'
+                        : 'border-gray-300 dark:border-gray-700'
+                    } text-gray-900 dark:text-gray-100`}
+                  >
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-apple-gray-400 dark:text-apple-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 mb-2">
-              Why does this goal matter to you? (optional) {appliedSuggestions.description && (
-                <span className="ml-2 text-green-600 dark:text-green-400 text-xs">✓ Applied</span>
-              )}
-            </label>
-            <textarea
-              id="description"
-              value={formData.description}
-              onChange={(e) => {
-                setFormData({ ...formData, description: e.target.value })
-                setAppliedSuggestions({ ...appliedSuggestions, description: false })
-              }}
-              rows={3}
-              className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border transition-all resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                appliedSuggestions.description && showFeedback
-                  ? 'border-green-300 dark:border-green-700'
-                  : 'border-gray-300 dark:border-gray-700'
-              } text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-500`}
-              placeholder="A quick note to remind yourself why this goal matters..."
-            />
-            <p className="mt-2 text-xs text-apple-gray-500 dark:text-apple-gray-500">
-              This helps you stay consistent on hard days.
-            </p>
-          </div>
+              <div className="animate-fade-in">
+                <label htmlFor="description" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 mb-2">
+                  Why does this goal matter to you? (optional) {appliedSuggestions.description && (
+                    <span className="ml-2 text-green-600 dark:text-green-400 text-xs">✓ Applied</span>
+                  )}
+                </label>
+                <textarea
+                  id="description"
+                  value={formData.description}
+                  onChange={(e) => {
+                    setFormData({ ...formData, description: e.target.value })
+                    setAppliedSuggestions({ ...appliedSuggestions, description: false })
+                  }}
+                  rows={3}
+                  className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border transition-all resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    appliedSuggestions.description && showFeedback
+                      ? 'border-green-300 dark:border-green-700'
+                      : 'border-gray-300 dark:border-gray-700'
+                  } text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-500`}
+                  placeholder="A quick note to remind yourself why this goal matters..."
+                />
+                <p className="mt-2 text-xs text-apple-gray-500 dark:text-apple-gray-500">
+                  This helps you stay consistent on hard days.
+                </p>
+              </div>
+            </>
+          )}
 
           <div className="flex gap-4 pt-4">
             <button

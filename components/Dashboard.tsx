@@ -111,7 +111,14 @@ export default async function Dashboard({ userId }: DashboardProps) {
         <div className={`flex ${goalsWithStreaks.length === 0 ? 'justify-center' : 'justify-between'} items-center mb-10 animate-fade-in`}>
           <div>
             <h2 className="text-4xl font-semibold tracking-tight mb-2">
-              {displayName ? `${displayName}, your goals live here` : 'Your goals start here'}
+              {displayName ? (
+                <>
+                  <span className="font-normal text-apple-gray-600 dark:text-apple-gray-400">{displayName},</span>{' '}
+                  your goals live here
+                </>
+              ) : (
+                'Your goals start here'
+              )}
             </h2>
             <p className="text-apple-gray-600 dark:text-apple-gray-400 text-base">
               Track your progress and build lasting habits
@@ -156,17 +163,17 @@ export default async function Dashboard({ userId }: DashboardProps) {
               <p className="text-apple-gray-600 dark:text-apple-gray-400 mb-8 max-w-md mx-auto text-base leading-relaxed">
                 Most people quit because they start too big.
                 <br />
-                Pick one goal. One action. Today.
+                Start small. Build momentum.
               </p>
               
               {/* Subtle 3-step preview */}
               <div className="mb-10 max-w-md mx-auto">
                 <div className="flex items-center justify-center gap-8 text-sm text-apple-gray-500 dark:text-apple-gray-500">
                   <div className="flex flex-col items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-apple-gray-100 dark:bg-apple-gray-800 flex items-center justify-center">
-                      <span className="text-apple-gray-400 dark:text-apple-gray-500 font-medium">1</span>
+                    <div className="w-8 h-8 rounded-full bg-apple-gray-200 dark:bg-apple-gray-700 flex items-center justify-center">
+                      <span className="text-apple-gray-700 dark:text-apple-gray-300 font-semibold">1</span>
                     </div>
-                    <span className="text-xs">Pick a goal</span>
+                    <span className="text-xs font-medium text-apple-gray-700 dark:text-apple-gray-300">Pick a goal</span>
                   </div>
                   <div className="w-8 h-px bg-apple-gray-200 dark:bg-apple-gray-700"></div>
                   <div className="flex flex-col items-center gap-2">

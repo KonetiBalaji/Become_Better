@@ -24,6 +24,8 @@ export default function LoginPage() {
       setSuccessMessage('Account created successfully! Please sign in to continue.')
     } else if (searchParams.get('onboarded') === 'true') {
       setSuccessMessage('All set. Sign in to continue your progress.')
+    } else if (searchParams.get('passwordReset') === 'true') {
+      setSuccessMessage('Password reset successful. Please sign in with your new password.')
     }
   }, [searchParams])
 
@@ -58,9 +60,29 @@ export default function LoginPage() {
     setForgotPasswordLoading(true)
 
     try {
-      // TODO: Implement password reset API endpoint
-      // For now, show a helpful message
-      setForgotPasswordMessage('Password reset functionality is coming soon. Please contact support if you need immediate assistance.')
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: forgotPasswordEmail,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setForgotPasswordMessage(data.error || 'Unable to process request. Please try again.')
+        return
+      }
+
+      // Show success message (always show same message for security)
+      setForgotPasswordMessage('If an account exists with this email, a password reset link has been sent. Please check your inbox.')
+      
+      // Close modal after a moment
+      setTimeout(() => {
+        setShowForgotPassword(false)
+        setForgotPasswordEmail('')
+      }, 3000)
     } catch (error) {
       setForgotPasswordMessage('Unable to process request. Please try again.')
     } finally {
@@ -219,8 +241,8 @@ export default function LoginPage() {
 
                 {forgotPasswordMessage && (
                   <div className={`px-4 py-3 rounded-xl text-sm ${
-                    forgotPasswordMessage.includes('coming soon') 
-                      ? 'bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/50 text-blue-800 dark:text-blue-300'
+                    forgotPasswordMessage.includes('reset link has been sent') 
+                      ? 'bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800/50 text-green-800 dark:text-green-300'
                       : 'bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/50 text-amber-800 dark:text-amber-300'
                   }`}>
                     {forgotPasswordMessage}

@@ -21,10 +21,11 @@ model User {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 
-  goals        Goal[]
-  goalUpdates  GoalUpdate[]
-  insights     Insight[]
-  settings     UserSettings?
+  goals              Goal[]
+  goalUpdates        GoalUpdate[]
+  insights           Insight[]
+  settings           UserSettings?
+  passwordResetTokens PasswordResetToken[]
 
   @@map("users")
 }
@@ -97,6 +98,20 @@ model UserSettings {
   user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_settings")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@map("password_reset_tokens")
 }
 
 enum GoalCategory {

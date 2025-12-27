@@ -23,7 +23,7 @@ export async function sendEmailNotification(options: EmailOptions): Promise<bool
         Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Become Better <noreply@becomebetter.app>',
+        from: process.env.RESEND_FROM_EMAIL || 'Become Better <noreply@becomebetter.app>',
         to: options.to,
         subject: options.subject,
         html: options.html,

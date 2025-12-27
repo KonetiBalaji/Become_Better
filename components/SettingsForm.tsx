@@ -4,9 +4,14 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { UserSettings } from '@prisma/client'
 
+interface TimezoneOption {
+  value: string
+  label: string
+}
+
 interface SettingsFormProps {
   initialSettings: UserSettings | null
-  timezones: string[]
+  timezones: TimezoneOption[]
 }
 
 export default function SettingsForm({ initialSettings, timezones }: SettingsFormProps) {
@@ -88,8 +93,8 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
           className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
         >
           {timezones.map((tz) => (
-            <option key={tz} value={tz}>
-              {tz}
+            <option key={tz.value} value={tz.value}>
+              {tz.label}
             </option>
           ))}
         </select>

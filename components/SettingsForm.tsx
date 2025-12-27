@@ -43,7 +43,7 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
       }
 
       if (showMessage) {
-        setMessage('Settings updated successfully')
+        setMessage('Settings saved')
         setTimeout(() => setMessage(''), 3000)
       }
       router.refresh()
@@ -115,16 +115,6 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
             </option>
           ))}
         </select>
-      </div>
-
-      <div className="pt-2">
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
-        >
-          {loading ? 'Saving...' : 'Save Settings'}
-        </button>
       </div>
 
       <div className="border-t border-gray-200 dark:border-gray-800 pt-6 mt-6">
@@ -214,6 +204,16 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
             </button>
           </div>
         </div>
+      </div>
+
+      <div className="pt-6 mt-6">
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+        >
+          {loading ? 'Saving...' : 'Save Settings'}
+        </button>
       </div>
     </form>
   )

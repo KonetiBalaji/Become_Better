@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { calculateStreak } from '@/lib/streak-calculator'
 import GoalCard from '@/components/GoalCard'
-import SignOutButton from '@/components/SignOutButton'
+import UserMenu from '@/components/UserMenu'
 import Link from 'next/link'
 
 interface DashboardProps {
@@ -90,15 +90,7 @@ export default async function Dashboard({ userId }: DashboardProps) {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <h1 className="text-2xl font-semibold tracking-tight">Become Better</h1>
-            <div className="flex items-center gap-6">
-              <Link
-                href="/settings"
-                className="text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-950 dark:hover:text-apple-gray-50 text-sm font-medium transition-colors"
-              >
-                Settings
-              </Link>
-              <SignOutButton />
-            </div>
+            <UserMenu initials={initials} displayName={displayName} />
           </div>
         </div>
       </nav>
@@ -202,14 +194,9 @@ export default async function Dashboard({ userId }: DashboardProps) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
-                <div className="space-y-2">
-                  <p className="text-sm text-apple-gray-500 dark:text-apple-gray-500">
-                    You can change this anytime.
-                  </p>
-                  <p className="text-xs text-apple-gray-400 dark:text-apple-gray-600">
-                    Your goals are private.
-                  </p>
-                </div>
+                <p className="text-xs text-apple-gray-400 dark:text-apple-gray-600 mt-3">
+                  Your goals are private.
+                </p>
               </div>
             </div>
           </div>

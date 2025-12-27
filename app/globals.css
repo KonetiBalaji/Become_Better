@@ -147,5 +147,38 @@
       color: #636366;
     }
   }
+
+  @keyframes glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 4px rgba(249, 115, 22, 0.6));
+      opacity: 1;
+    }
+    50% {
+      filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.9));
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes fillBar1 {
+    from {
+      height: 0;
+      y: 20;
+    }
+    to {
+      height: 8;
+      y: 12;
+    }
+  }
+
+  @keyframes fillBar2 {
+    from {
+      height: 0;
+      y: 20;
+    }
+    to {
+      height: 12;
+      y: 8;
+    }
+  }
 }
 

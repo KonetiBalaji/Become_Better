@@ -80,6 +80,11 @@ export default function LoginPage() {
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
+          {successMessage && (
+            <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800/50 text-green-800 dark:text-green-300 px-4 py-3 rounded-xl text-sm animate-scale-in">
+              {successMessage}
+            </div>
+          )}
           {error && (
             <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/50 text-amber-800 dark:text-amber-300 px-4 py-3 rounded-xl text-sm animate-scale-in">
               {error}

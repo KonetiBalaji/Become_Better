@@ -7,17 +7,35 @@ const globalForPrisma = globalThis as unknown as {
 // Use Prisma Accelerate URL if available (for production), otherwise use DATABASE_URL
 const databaseUrl = process.env.PRISMA_ACCELERATE_URL || process.env.DATABASE_URL
 
-export const prisma = globalForPrisma.prisma ?? new PrismaClient(
-  databaseUrl
-    ? {
+// Create Prisma Client with proper error handling
+const createPrismaClient = () => {
+  try {
+    if (databaseUrl) {
+      return new PrismaClient({
         datasources: {
           db: {
             url: databaseUrl,
           },
         },
-      }
-    : undefined
-)
+        log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+      })
+    }
+    // Fallback to default PrismaClient which will use DATABASE_URL from env
+    return new PrismaClient({
+      log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+    })
+  } catch (error) {
+    console.error('Failed to create Prisma Client:', error)
+    throw error
+  }
+}
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+export const prisma = globalForPrisma.prisma ?? createPrismaClient()
+
+// Ensure singleton in production
+if (process.env.NODE_ENV === 'production') {
+  globalForPrisma.prisma = prisma
+} else {
+  globalForPrisma.prisma = prisma
+}
 

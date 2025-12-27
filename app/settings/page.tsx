@@ -26,35 +26,6 @@ export default async function SettingsPage() {
     redirect('/login')
   }
 
-  // Get user data for avatar
-  const userData = await prisma.user.findUnique({
-    where: { id: user.id },
-    select: {
-      firstName: true,
-      lastName: true,
-      nickname: true,
-      email: true,
-    },
-  })
-
-  // Generate initials for avatar
-  const getInitials = () => {
-    if (userData?.nickname) {
-      return userData.nickname.charAt(0).toUpperCase()
-    }
-    if (userData?.firstName && userData?.lastName) {
-      return `${userData.firstName.charAt(0)}${userData.lastName.charAt(0)}`.toUpperCase()
-    }
-    if (userData?.firstName) {
-      return userData.firstName.charAt(0).toUpperCase()
-    }
-    if (userData?.email) {
-      return userData.email.charAt(0).toUpperCase()
-    }
-    return 'U'
-  }
-  const initials = getInitials()
-
   const settings = await prisma.userSettings.findUnique({
     where: { userId: user.id },
   })
@@ -67,13 +38,10 @@ export default async function SettingsPage() {
             <Link href="/" className="text-2xl font-bold">
               Become Better
             </Link>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <Link href="/" className="text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-950 dark:hover:text-apple-gray-50 text-sm font-medium transition-colors">
                 Goals
               </Link>
-              <div className="w-8 h-8 rounded-full bg-apple-gray-200 dark:bg-apple-gray-700 flex items-center justify-center text-xs font-medium text-apple-gray-700 dark:text-apple-gray-300">
-                {initials}
-              </div>
               <SignOutButton />
             </div>
           </div>

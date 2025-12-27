@@ -38,10 +38,15 @@ In your Vercel project **Settings** → **Environment Variables**, add:
 #### Required Variables:
 
 ```
-DATABASE_URL=<your-vercel-postgres-connection-string>
+DATABASE_URL=<your-direct-postgres-connection-string>
+PRISMA_ACCELERATE_URL=<your-prisma-accelerate-connection-string>
 ```
 
-**How to get the connection string:**
+**For Prisma Accelerate (Recommended):**
+- If you're using Prisma Accelerate, use the `prisma+postgres://` connection string
+- The app will automatically use Accelerate for better performance
+
+**For Vercel Postgres:**
 - Go to your Postgres database in Vercel
 - Click **".env.local"** tab
 - Copy the `POSTGRES_URL` value

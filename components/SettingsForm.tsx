@@ -51,10 +51,10 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
     <form onSubmit={handleSubmit} className="space-y-6">
       {message && (
         <div
-          className={`px-4 py-3 rounded ${
+          className={`px-4 py-3 rounded-xl text-sm ${
             message.includes('success')
-              ? 'bg-green-50 text-green-700 border border-green-200'
-              : 'bg-red-50 text-red-700 border border-red-200'
+              ? 'bg-green-50 dark:bg-green-950/20 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800/50'
+              : 'bg-amber-50 dark:bg-amber-950/20 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50'
           }`}
         >
           {message}
@@ -62,7 +62,7 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
       )}
 
       <div>
-        <label htmlFor="reminderTime" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="reminderTime" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 mb-2">
           Reminder Time
         </label>
         <input
@@ -70,22 +70,22 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
           type="time"
           value={formData.reminderTime}
           onChange={(e) => setFormData({ ...formData, reminderTime: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
         />
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-2 text-sm text-apple-gray-500 dark:text-apple-gray-500">
           When would you like to receive daily reminders?
         </p>
       </div>
 
       <div>
-        <label htmlFor="timezone" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="timezone" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 mb-2">
           Timezone
         </label>
         <select
           id="timezone"
           value={formData.timezone}
           onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
         >
           {timezones.map((tz) => (
             <option key={tz} value={tz}>
@@ -95,16 +95,16 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
         </select>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-4 pt-2">
         <div className="flex items-center">
           <input
             id="darkMode"
             type="checkbox"
             checked={formData.darkMode}
             onChange={(e) => setFormData({ ...formData, darkMode: e.target.checked })}
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-700 rounded"
           />
-          <label htmlFor="darkMode" className="ml-2 block text-sm text-gray-700">
+          <label htmlFor="darkMode" className="ml-3 block text-sm text-apple-gray-900 dark:text-apple-gray-100">
             Dark Mode
           </label>
         </div>
@@ -117,9 +117,9 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
             onChange={(e) =>
               setFormData({ ...formData, emailNotifications: e.target.checked })
             }
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-700 rounded"
           />
-          <label htmlFor="emailNotifications" className="ml-2 block text-sm text-gray-700">
+          <label htmlFor="emailNotifications" className="ml-3 block text-sm text-apple-gray-900 dark:text-apple-gray-100">
             Email Notifications
           </label>
         </div>
@@ -132,9 +132,9 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
             onChange={(e) =>
               setFormData({ ...formData, pushNotifications: e.target.checked })
             }
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-700 rounded"
           />
-          <label htmlFor="pushNotifications" className="ml-2 block text-sm text-gray-700">
+          <label htmlFor="pushNotifications" className="ml-3 block text-sm text-apple-gray-900 dark:text-apple-gray-100">
             Push Notifications
           </label>
         </div>
@@ -143,7 +143,7 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:bg-gray-400"
+        className="w-full apple-button disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? 'Saving...' : 'Save Settings'}
       </button>

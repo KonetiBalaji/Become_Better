@@ -98,8 +98,8 @@ export default function LoginPage() {
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">Welcome back</h1>
           <p className="text-gray-700 dark:text-gray-300 text-base">
             Your progress is waiting.
-          </p>
-        </div>
+            </p>
+          </div>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
           {successMessage && (
@@ -107,30 +107,30 @@ export default function LoginPage() {
               {successMessage}
             </div>
           )}
-          {error && (
+            {error && (
             <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/50 text-amber-800 dark:text-amber-300 px-4 py-3 rounded-xl text-sm animate-scale-in">
-              {error}
-            </div>
-          )}
+                {error}
+              </div>
+            )}
 
           <div className="space-y-4">
-            <div>
+              <div>
               <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                placeholder="name@example.com"
-              />
-            </div>
+                  placeholder="name@example.com"
+                />
+              </div>
 
-            <div>
+              <div>
               <div className="flex items-center justify-between mb-2">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Password
@@ -172,39 +172,39 @@ export default function LoginPage() {
                   )}
                 </button>
               </div>
+              </div>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={loading}
+            <button
+              type="submit"
+              disabled={loading}
             className="apple-button w-full disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
-          >
-            {loading ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Signing in...
-              </span>
-            ) : (
+            >
+              {loading ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Signing in...
+                </span>
+              ) : (
               'Continue'
-            )}
-          </button>
+              )}
+            </button>
 
           <p className="text-center text-sm text-gray-600 dark:text-gray-400 italic">
             Consistency compounds, even today.
           </p>
-        </form>
+          </form>
 
         <div className="text-center space-y-3">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Don&apos;t have an account?{' '}
+              Don&apos;t have an account?{' '}
             <Link href="/register" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors">
-              Sign up
-            </Link>
-          </p>
+                Sign up
+              </Link>
+            </p>
           <p className="text-xs text-gray-500 dark:text-gray-500">
             Your data stays private.
           </p>
@@ -270,9 +270,9 @@ export default function LoginPage() {
                   </button>
                 </div>
               </form>
-            </div>
           </div>
         </div>
+      </div>
       )}
     </div>
   )

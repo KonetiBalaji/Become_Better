@@ -11,6 +11,7 @@ const createGoalSchema = z.object({
   category: z.enum(['Learning', 'Health', 'Career', 'Behaviour', 'Emotional', 'Financial']),
   difficulty: z.enum(['easy', 'medium', 'hard']),
   successDefinition: z.string().optional(),
+  icon: z.string().optional(),
 })
 
 export async function GET(request: NextRequest) {
@@ -62,6 +63,7 @@ export async function POST(request: NextRequest) {
         category: validatedData.category,
         difficulty: validatedData.difficulty,
         successDefinition: validatedData.successDefinition,
+        icon: validatedData.icon,
       },
     })
 

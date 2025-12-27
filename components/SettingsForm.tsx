@@ -103,18 +103,25 @@ export default function SettingsForm({ initialSettings, timezones }: SettingsFor
         <label htmlFor="timezone" className="block text-sm font-medium text-apple-gray-900 dark:text-apple-gray-100 mb-2">
           Timezone
         </label>
-        <select
-          id="timezone"
-          value={formData.timezone}
-          onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
-          className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-        >
-          {timezones.map((tz) => (
-            <option key={tz.value} value={tz.value}>
-              {tz.label}
-            </option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            id="timezone"
+            value={formData.timezone}
+            onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
+            className="w-full px-4 py-3 pr-10 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none cursor-pointer"
+          >
+            {timezones.map((tz) => (
+              <option key={tz.value} value={tz.value}>
+                {tz.label}
+              </option>
+            ))}
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <svg className="w-5 h-5 text-apple-gray-400 dark:text-apple-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
       </div>
 
       <div className="border-t border-gray-200 dark:border-gray-800 pt-6 mt-6">
